@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+  <head>
+    <title>sjy.id.au</title>
+    <meta charset=utf-8>
+    <link rel='shortcut icon' href=sy.svg>
+<style>
+
+html { height: 100% }
+body { height: 100%; overflow: hidden }
+img { position: absolute; height: 10em; opacity: 0.1 }
+path { fill: #89a2b7 }
+
+</style>
+  </head>
+  <body>
+    <img src="sy.svg">
+<script>
+
+const img = document.querySelector('img')
+img.onload = animate
+
+var dx = Math.random()
+var dy = Math.random()
+const bodyWidth = document.body.getBoundingClientRect().width
+const bodyHeight = document.body.getBoundingClientRect().height
+
+function animate() {
+  const xMax = bodyWidth - img.width
+  const yMax = bodyHeight - img.height
+  var x = Math.random() * xMax
+  var y = Math.random() * yMax
+  var theta = Math.random() * 360
+  var dTheta = Math.random() * 10
+  function frame(ms) {
+    x += dx * (3 + Math.sin(ms / 1000)) * 5
+    y += dy * (3 + Math.sin(ms / 1000)) * 5
+    theta += dTheta
+    img.style.left = `${x}px`
+    img.style.top = `${y}px`
+    img.style.transform = `rotate(${theta}deg)`
+    if (x < 0 || x > xMax) { dx = -1 * dx; dTheta = Math.random() * -10 * Math.sign(dTheta) }
+    if (y < 0 || y > yMax) dy = -1 * dy
+    window.requestAnimationFrame(frame)
+  }
+  window.requestAnimationFrame(frame)
+}
+
+</script>
+  </body>
+</html>
